@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { roles: ['editor'], title: 'Dashboard', icon: 'dashboard' }
     }]
   },
 
@@ -148,13 +148,26 @@ export const constantRoutes = [
     ]
   },
 
+  // {
+  //   path: 'external-link',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+  //       meta: { title: 'External Link', icon: 'link' }
+  //     }
+  //   ]
+  // },
+
   {
-    path: 'external-link',
+    path: '/admin',
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'page401',
+        name: 'admin',
+        component: () => import('@/views/401'),
+        meta: { title: 'page401', icon: 'admins' }
       }
     ]
   },
