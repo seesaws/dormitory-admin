@@ -101,7 +101,6 @@ public class NoticeController {
         log.info("{}, body: {}",oper,body);
 
         SysNotice notice = JSON.parseObject(body, SysNotice.class);
-
         SysNotice notice1 = noticeService.getById(notice.getNid());
         return Json.succ(oper).data("data",notice1);
     }
