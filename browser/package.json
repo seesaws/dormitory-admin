@@ -26,7 +26,7 @@
     "url": "https://github.com/PanJiaChen/vue-element-admin/issues"
   },
   "dependencies": {
-    "axios": "0.17.1",
+    "axios": "0.18.1",
     "clipboard": "1.7.1",
     "codemirror": "5.32.0",
     "dropzone": "5.2.0",
@@ -42,7 +42,6 @@
     "nprogress": "0.2.0",
     "screenfull": "4.2.0",
     "showdown": "1.8.5",
-    "simplemde": "1.11.2",
     "sortablejs": "1.7.0",
     "vue": "2.5.10",
     "vue-count-to": "1.0.13",
@@ -69,7 +68,7 @@
     "copy-webpack-plugin": "4.3.0",
     "cross-env": "5.1.1",
     "css-loader": "0.28.7",
-    "eslint": "4.13.1",
+    "eslint": "4.18.2",
     "eslint-friendly-formatter": "3.0.0",
     "eslint-loader": "1.9.0",
     "eslint-plugin-html": "4.0.1",
@@ -98,8 +97,8 @@
     "vue-style-loader": "3.0.3",
     "vue-template-compiler": "2.5.10",
     "webpack": "3.10.0",
-    "webpack-bundle-analyzer": "2.9.1",
-    "webpack-dev-server": "2.9.7",
+    "webpack-bundle-analyzer": "3.3.2",
+    "webpack-dev-server": "3.1.11",
     "webpack-merge": "4.1.1"
   },
   "engines": {
