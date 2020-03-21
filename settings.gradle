@@ -1,0 +1,4 @@
+rootProject.name = 'dormitory'
+include 'server'
+include 'browser'
+

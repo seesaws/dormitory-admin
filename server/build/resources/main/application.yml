@@ -1,0 +1,25 @@
+db: dor
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+    session:
+      cookie:
+        name: RANSID
+spring:
+  profiles:
+    active: dev
+    include: druid,mybatisplus,shiro
+  redis:
+    host: localhost
+    port: 6379
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/${db}?serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: 123456
+logging:
+  level:
+    com.dormitory: debug
+  file:
+    path: ./logs
