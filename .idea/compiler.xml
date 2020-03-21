@@ -11,5 +11,9 @@
         <module name="dormitory.server.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dormitory.browser.main" target="1.8" />
+      <module name="dormitory.browser.test" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
