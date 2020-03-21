@@ -9,7 +9,7 @@ tests/**/coverage/
 browser/
 build/
 
-# Editor directories and files
+# Editor directories and files 1
 .idea
 .vscode
 *.suo
