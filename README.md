@@ -1,2 +1,2 @@
 # dormitory-admin
-a gradle Springboot vue project
+a Gradle SpringBoot Vue project
