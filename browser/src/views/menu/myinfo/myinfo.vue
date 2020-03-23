@@ -31,7 +31,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import PanThumb from '@/components/PanThumb'
-  // 默认导出
+  // 添加个人信息
   export default {
     name: 'myinfo',
     components: { PanThumb },

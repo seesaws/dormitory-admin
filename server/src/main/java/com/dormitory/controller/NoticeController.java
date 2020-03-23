@@ -93,14 +93,15 @@ public class NoticeController {
         return Json.result(oper, success);
     }
 
-    @PermInfo("修改系统公告")
+    @PermInfo("更新系统公告")
     @PatchMapping("/update")
     public Json update(@RequestBody String body) {
 
-        String oper = "update sys notice";
+        String oper = "update sys notice 更新系统公告";
         log.info("{}, body: {}",oper,body);
 
         SysNotice notice = JSON.parseObject(body, SysNotice.class);
+        System.out.println(notice);
         SysNotice notice1 = noticeService.getById(notice.getNid());
         return Json.succ(oper).data("data",notice1);
     }
