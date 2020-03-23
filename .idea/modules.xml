@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/browser/dormitory.browser.iml" filepath="$PROJECT_DIR$/.idea/modules/browser/dormitory.browser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/browser/dormitory.browser.main.iml" filepath="$PROJECT_DIR$/.idea/modules/browser/dormitory.browser.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/dormitory.server.iml" filepath="$PROJECT_DIR$/.idea/modules/server/dormitory.server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/dormitory.server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/server/dormitory.server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/dormitory.server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/server/dormitory.server.test.iml" />
+    </modules>
+  </component>
+</project>
