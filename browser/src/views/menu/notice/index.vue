@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'Notice_manage',
+  name: 'notice_manage',
   computed: {
     cachedViews() {
       return this.$store.state.tagsView.cachedViews

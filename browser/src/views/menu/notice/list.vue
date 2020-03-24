@@ -21,7 +21,7 @@
       </el-table-column>
       <el-table-column min-width="300px" label="标题" header-align="center">
         <template slot-scope="{row}">
-          <router-link :to="'/example/edit/'+row.nid" class="link-type">
+          <router-link :to="'/notice_manage/edit/'+row.nid" class="link-type">
             <span>{{ row.title }}</span>
           </router-link>
         </template>
@@ -33,12 +33,25 @@
         align="center">
       </el-table-column>
 
+      <el-table-column
+        prop="updated"
+        label="日期"
+        width="180"
+        align="center">
+        <template slot-scope="scope">
+          <el-tag style="margin: 2px;" v-for="notice in scope.row.roleList" :key="notice.nid">{{notice.updated}}</el-tag>
+        </template>
+        <template slot-scope="scope">
+          <span v-text="parseTime(scope.row.updated)"></span>
+        </template>
+      </el-table-column>
+
 
       <el-table-column align="center" label="操作" width="230" class-name="small-padding fixed-width">
 
         <template slot-scope="scope">
 
-          <router-link :to="'/notice/edit/'+scope.row.nid" class="link-type">
+          <router-link :to="'/notice_manage/edit/'+scope.row.nid" class="link-type">
             <el-tooltip content="编辑" placement="top">
             <el-button  size="medium" type="info" icon="el-icon-edit" circle plain></el-button>
           </el-tooltip>

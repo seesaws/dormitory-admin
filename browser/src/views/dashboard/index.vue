@@ -21,7 +21,8 @@
       <el-table-column
         prop="title"
         label="标题"
-        style="width: 100%">
+        style="width: 100%"
+        header-align="center">>
       </el-table-column>
       <el-table-column
         prop="author"

@@ -212,12 +212,13 @@
       this.fetchData()
     },
 
-    watch: {
+     watch: {
       // 延时查询
       'tableQuery.nick': debounce(function() {
         this.fetchData()
       }, 500)
     }, // watch
+
 
     methods: {
 

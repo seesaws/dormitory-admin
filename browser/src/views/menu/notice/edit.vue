@@ -6,7 +6,7 @@
 import NoticeDetail from './components/NoticeDetail'
 
 export default {
-  name: 'EditForm',
+  name: 'notice_edit',
   components: { NoticeDetail }
 }
 </script>

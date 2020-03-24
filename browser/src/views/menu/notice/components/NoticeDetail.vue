@@ -29,7 +29,7 @@
 
                 <el-col :span="10">
                   <el-form-item label-width="120px" label="发表时间:" class="postInfo-container-item">
-                    <el-date-picker v-model="postForm.publishtime" type="datetime" value-format="timestamp" placeholder="选择日期和时间" />
+                    <el-date-picker v-model="postForm.publishtime" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期和时间" />
                   </el-form-item>
                 </el-col>
 
@@ -54,7 +54,8 @@
 import Tinymce from '@/components/Tinymce'
 import MDinput from '@/components/MDinput'
 import Sticky from '@/components/Sticky' // 粘性header组件
-import { fetchNotice, createNotice } from '@/api/notice'
+import { fetchNotice, createNotice, updateNotice, fetchList } from '@/api/notice'
+import debounce from 'lodash/debounce'
 
 const defaultForm = {
   title: '', // 文章题目
@@ -67,6 +68,12 @@ const defaultForm = {
 export default {
   name: 'NoticeDetail',
   components: { Tinymce, MDinput, Sticky },
+  props: {
+    isEdit: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     const validateRequire = (rule, value, callback) => {
       if (value === '') {
@@ -107,8 +114,8 @@ export default {
   },
   created() {
     if (this.isEdit) {
-      const id = this.$route.params && this.$route.params.id
-      this.fetchData(id)
+      const nid = this.$route.params && this.$route.params.nid
+      this.fetchData(nid)
     }
 
     // Why need to make a copy of this.$route here?
@@ -116,15 +123,22 @@ export default {
     // https://github.com/PanJiaChen/vue-element-admin/issues/1221
     this.tempRoute = Object.assign({}, this.$route)
   },
+  watch: {
+
+
+
+  },
   methods: {
 
-    fetchData(id) {
-      fetchNotice(id).then(response => {
-        this.postForm = response.data
+    fetchData(nid) {
+      fetchNotice(nid).then(response => {
+        this.postForm = response.data.data
 
         // just for test
-        this.postForm.title += `   Article Id:${this.postForm.id}`
-        this.postForm.content_short += `   Article Id:${this.postForm.id}`
+        this.postForm.nid = this.postForm.nid
+        this.postForm.author = this.postForm.author
+        this.postForm.content = this.postForm.content
+        this.postForm.publishtime = this.postForm.publishtime
 
         // set tagsview title
         this.setTagsViewTitle()
@@ -136,37 +150,52 @@ export default {
       })
     },
     setTagsViewTitle() {
-      const title = this.lang === 'zh' ? '编辑文章' : 'Edit Article'
-      const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.postForm.id}` })
-      this.$store.dispatch('tagsView/updateVisitedView', route)
+      const title = this.lang === 'zh' ? '编辑文章' : 'Edit Notice'
+      const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.postForm.nid}` })
+
     },
     setPageTitle() {
-      const title = 'Edit Article'
-      document.title = `${title} - ${this.postForm.id}`
+      const title = 'Edit Notice'
+      document.title = `${title} - ${this.postForm.nid}`
     },
     submitForm() {
       console.log(this.postForm)
-
-      this.$refs.postForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          // 发起请求
-          createNotice(this.postForm).then(res => {
-            this.$notify({
-              title: '成功',
-              message: '发布文章成功',
-              type: 'success',
-              duration: 2000
-            })
-
-            this.loading = false
-            this.$router.push({ path: '/notice_manage/list' })
+      if (this.isEdit) {
+        updateNotice(this.postForm).then(res => {
+          this.$notify({
+            title: '成功',
+            message: '更新公告成功',
+            type: 'success',
+            duration: 2000
           })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+
+          this.loading = false
+          this.$router.push({ path: '/notice_manage/list' })
+          this.$router.go(0);
+        })
+      } else {
+        this.$refs.postForm.validate(valid => {
+          if (valid) {
+            this.loading = true
+            // 发起请求
+            createNotice(this.postForm).then(res => {
+              this.$notify({
+                title: '成功',
+                message: '发布公告成功',
+                type: 'success',
+                duration: 2000
+              })
+
+              this.loading = false
+              this.$router.push({ path: '/notice_manage/list' })
+
+            })
+          } else {
+            console.log('error submit!!')
+            return false
+          }
+        })
+      }
     },
     draftForm() {
       if (this.postForm.content.length === 0 || this.postForm.title.length === 0) {
@@ -177,7 +206,7 @@ export default {
         return
       }
       this.$message({
-        message: '保存成功',
+        message: '保存成功(模拟)',
         type: 'success',
         showClose: true,
         duration: 1000

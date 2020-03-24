@@ -11,11 +11,11 @@ export function fetchList(pageParam) {
   })
 }
 
-export function fetchNotice(id) {
+export function fetchNotice(nid) {
   return request({
     url: '/notice/detail',
     method: 'get',
-    params: { id }
+    params: { nid }
   })
 }
 
@@ -38,7 +38,7 @@ export function createNotice(data) {
 export function updateNotice(data) {
   return request({
     url: '/notice/update',
-    method: 'post',
+    method: 'patch',
     data
   })
 }

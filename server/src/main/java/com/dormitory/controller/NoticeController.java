@@ -49,12 +49,14 @@ public class NoticeController {
         String oper = "query notice";
         log.info("{}, body: {}", oper, body);
 
+        QueryWrapper<SysNotice> queryWrapper = new QueryWrapper<>();
+
         JSONObject json = JSON.parseObject(body);
         int size = json.getIntValue("size");
         int current = json.getIntValue("current");
         if (current == 0) current = 1;
         if (size == 0) size = 10;
-        Page<SysNotice> page = noticeService.page(new Page<>(current, size));
+        Page<SysNotice> page = noticeService.page(new Page<>(current, size),queryWrapper.orderByDesc("publishtime"));
         return Json.succ(oper).data("page", page);
     }
 
@@ -93,6 +95,17 @@ public class NoticeController {
         return Json.result(oper, success);
     }
 
+    @PermInfo("获取系统公告详情")
+    @GetMapping("/detail")
+    public Json get(String nid) {
+
+        String oper = "get sys notice 获取系统公告";
+        log.info("{}, body: {}",oper,nid);
+
+        SysNotice notice = noticeService.getById(nid);
+        return Json.succ(oper).data("data",notice);
+    }
+
     @PermInfo("更新系统公告")
     @PatchMapping("/update")
     public Json update(@RequestBody String body) {
@@ -101,9 +114,9 @@ public class NoticeController {
         log.info("{}, body: {}",oper,body);
 
         SysNotice notice = JSON.parseObject(body, SysNotice.class);
-        System.out.println(notice);
-        SysNotice notice1 = noticeService.getById(notice.getNid());
-        return Json.succ(oper).data("data",notice1);
+        notice.setUpdated(new Date());
+        boolean result = noticeService.updateById(notice);
+        return Json.result(oper,result);
     }
 
 
