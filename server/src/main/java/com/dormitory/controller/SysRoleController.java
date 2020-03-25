@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  * @Author CoderL
  * @Date 2020/3/3 17:05
  **/
-@PermInfo(value = "系统角色模块")
+@PermInfo(value = "系统角色模块",pval = "a:sys:role")
 @RestController
 @RequiresPermissions("a:sys:role")
 @RequestMapping("/sys_role")
@@ -149,7 +149,7 @@ public class SysRoleController {
 
         Wrapper<SysRolePerm> deleteRelationParam = new QueryWrapper<SysRolePerm>().eq("role_id", rid).eq("perm_type", ptype);
         boolean deleteRelationSucc = rolePermService.remove(deleteRelationParam);
-        if (!deleteRelationSucc) return Json.fail(oper, "无法解除原来的角色-权限关系");
+//        if (!deleteRelationSucc) return Json.fail(oper, "无法解除原来的角色-权限关系");
 
         if (!pvals.isEmpty()){
             List<SysRolePerm> list = vo.getPvals().stream().map(pval -> new SysRolePerm(rid, pval,ptype)).collect(Collectors.toList());

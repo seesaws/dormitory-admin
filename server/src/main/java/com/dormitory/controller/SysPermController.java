@@ -219,6 +219,7 @@ public class SysPermController {
             }
             perm.setParent(parentPval);
             perm.setPtype(PermType.API);
+            assert rpAnno != null;
             perm.setPval(rpAnno.value()[0]);
             return perm;
         }).collect(Collectors.toList());

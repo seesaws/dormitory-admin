@@ -10,6 +10,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,7 @@ import java.util.UUID;
  * @Author CoderL
  * @Date 2020/3/3 17:04
  **/
-@PermInfo(value = "登录模块", pval = "a:auth")
+@PermInfo(pval = "a:auth:login",value = "登录模块")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -66,6 +67,7 @@ public class AuthController {
      * @return
      */
     @PostMapping("/login")
+
     public Json login(@RequestBody String body){
 
         String oper = "user login";

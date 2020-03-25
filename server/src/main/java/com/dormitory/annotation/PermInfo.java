@@ -17,7 +17,7 @@ public @interface PermInfo {
      * 权限值
      * @return
      */
-    String pval() default "";
+    String pval() default "默认值";
 
     /**
      * 权限名称

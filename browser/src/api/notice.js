@@ -1,5 +1,9 @@
 import request from '@/utils/request'
 
+/**
+ * 公告列表
+ * @param {*} pageParam
+ */
 export function fetchList(pageParam) {
   return request({
     url: '/notice/query',

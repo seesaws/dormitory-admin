@@ -55,7 +55,6 @@ import Tinymce from '@/components/Tinymce'
 import MDinput from '@/components/MDinput'
 import Sticky from '@/components/Sticky' // 粘性header组件
 import { fetchNotice, createNotice, updateNotice, fetchList } from '@/api/notice'
-import debounce from 'lodash/debounce'
 
 const defaultForm = {
   title: '', // 文章题目
@@ -123,10 +122,12 @@ export default {
     // https://github.com/PanJiaChen/vue-element-admin/issues/1221
     this.tempRoute = Object.assign({}, this.$route)
   },
+
   watch: {
-
-
-
+    '$router'(to, form) {
+    // 路由发生变化页面刷新
+      this.$router.go(0)
+    }
   },
   methods: {
 
@@ -140,24 +141,13 @@ export default {
         this.postForm.content = this.postForm.content
         this.postForm.publishtime = this.postForm.publishtime
 
-        // set tagsview title
-        this.setTagsViewTitle()
-
         // set page title
         this.setPageTitle()
       }).catch(err => {
         console.log(err)
       })
     },
-    setTagsViewTitle() {
-      const title = this.lang === 'zh' ? '编辑文章' : 'Edit Notice'
-      const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.postForm.nid}` })
 
-    },
-    setPageTitle() {
-      const title = 'Edit Notice'
-      document.title = `${title} - ${this.postForm.nid}`
-    },
     submitForm() {
       console.log(this.postForm)
       if (this.isEdit) {
@@ -171,7 +161,6 @@ export default {
 
           this.loading = false
           this.$router.push({ path: '/notice_manage/list' })
-          this.$router.go(0);
         })
       } else {
         this.$refs.postForm.validate(valid => {
@@ -188,7 +177,6 @@ export default {
 
               this.loading = false
               this.$router.push({ path: '/notice_manage/list' })
-
             })
           } else {
             console.log('error submit!!')

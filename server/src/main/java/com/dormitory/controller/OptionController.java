@@ -19,6 +19,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,17 +33,19 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@PermInfo(value = "选项模块", pval = "a:option")
+@PermInfo(value = "选项模块", pval = "a:sys:option")
 @RestController
 @RequestMapping("/option")
+
 public class OptionController {
 
     private static final Logger log = LoggerFactory.getLogger(OptionController.class);
 
     @Autowired
     private SysRoleService sysRoleService;
-
+    @RequiresPermissions("a:sys:option:select")
     @GetMapping("/role")
+    @PermInfo("查询所有角色列表")
     public Json listRoleOptions() {
         String oper = "list role options";
         log.info(oper);

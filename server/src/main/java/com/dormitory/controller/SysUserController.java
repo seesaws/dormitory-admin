@@ -36,9 +36,10 @@ import java.util.stream.Collectors;
  * @Author CoderL
  * @Date 2020/3/3 17:05
  **/
-@PermInfo(value = "系统用户模块", pval = "a:sys:api")
+@PermInfo(value = "系统用户模块", pval = "a:sys:user")
 @RestController
 @RequestMapping("/sys_user")
+@RequiresPermissions("a:sys:user")
 public class SysUserController {
 
     private static final Logger log = LoggerFactory.getLogger(SysUserController.class);

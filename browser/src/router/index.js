@@ -126,9 +126,9 @@ export const asyncRouterMap = [
       icon: 'notification'
     },
     children: [
-      { path: 'create', component: _import('menu/notice/create'), name: 'notice_create', meta: { title: '发布公告', icon: 'edit-square', noCache: true }},
-      { path: 'edit/:nid(\\d+)', component: _import('menu/notice/edit'), name: 'notice_edit', meta: { title: '编辑公告', noCache: true, activeMenu: '/notice/list' }, hidden: true },
-      { path: 'list', component: _import('menu/notice/list'), name: 'notice_list', meta: { title: '公告列表', icon: 'unordered list' }}
+      { path: 'create', component: _import('menu/notice/create'), name: 'notice_create', meta: { perm: 'm:notice_manage:create', title: '发布公告', icon: 'edit-square', noCache: true }},
+      { path: 'edit/:nid(\\d+)', component: _import('menu/notice/edit'), name: 'notice_edit', meta: { perm: 'm:notice_manage:edit', title: '编辑公告', noCache: true, activeMenu: '/notice/list' }, hidden: true },
+      { path: 'list', component: _import('menu/notice/list'), name: 'notice_list', meta: { perm: 'm:notice_manage:list', title: '公告列表', icon: 'unordered list', noCache: true }}
     ]
   },
   { path: '*', redirect: '/404', hidden: true }

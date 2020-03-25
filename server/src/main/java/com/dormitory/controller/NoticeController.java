@@ -33,7 +33,7 @@ import java.util.Date;
  * @Date 2020/3/15 14:52
  **/
 
-@PermInfo(value = "公告模块", pval = "a:notice")
+@PermInfo(value = "公告模块", pval = "a:sys:notice")
 @RestController
 @RequestMapping("/notice")
 public class NoticeController {
@@ -45,6 +45,7 @@ public class NoticeController {
 
     @PermInfo("查询所有系统公告")
     @PostMapping("/query")
+    @RequiresPermissions("a:sys:notice:query")
     public Object query(@RequestBody String body) {
         String oper = "query notice";
         log.info("{}, body: {}", oper, body);
@@ -62,6 +63,7 @@ public class NoticeController {
 
     @PermInfo("添加系统公告")
     @PostMapping("/create")
+    @RequiresPermissions("a:sys:notice:create")
     public Json add(@RequestBody String body) {
 
         String oper = "add sys notice";
@@ -84,6 +86,7 @@ public class NoticeController {
 
     @PermInfo("删除系统公告")
     @DeleteMapping("/delete")
+    @RequiresPermissions("a:sys:notice:delete")
     public Json delete(@RequestBody String body) {
 
         String oper = "delete sys notice";
@@ -97,6 +100,7 @@ public class NoticeController {
 
     @PermInfo("获取系统公告详情")
     @GetMapping("/detail")
+    @RequiresPermissions("a:sys:notice:detail")
     public Json get(String nid) {
 
         String oper = "get sys notice 获取系统公告";
@@ -108,6 +112,7 @@ public class NoticeController {
 
     @PermInfo("更新系统公告")
     @PatchMapping("/update")
+    @RequiresPermissions("a:sys:notice:update")
     public Json update(@RequestBody String body) {
 
         String oper = "update sys notice 更新系统公告";
