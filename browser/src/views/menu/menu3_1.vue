@@ -3,10 +3,10 @@
     <div class=" clearfix">
       <div class="pan-item" >
         <div class="pan-info"></div>
-        <img class="pan-thumb" :src="avatar">
+        <img class="pan-thumb" :src="form.headimgsrc" >
       </div>
       <div class="info-container">
-        <!--<span class="display_name">{{nick}}</span>-->
+        <!-- <span class="display_name">{{nick}}</span> -->
         <div style="font-size: 38px;line-height: 38px;color: #212121;padding-top: 15px;">
           {{nick}}
         </div>
@@ -21,16 +21,83 @@
           <el-tag style="margin-right: 5px;" type="info" v-else v-for="r in perms" :key="r.val">{{r.name}}</el-tag>
         </div>
 
-
       </div>
     </div>
+
+      <el-form ref="form" :model="form" label-width="80px" class="form1">
+
+        <el-row>
+          <el-col :span="6">
+              <el-form-item label="uid">
+                  <el-input v-model="form.uid"  :disabled="true"></el-input>
+              </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-col :span="6">
+              <el-form-item label="学号">
+                  <el-input prefix-icon="el-icon-warning-outline" v-model="form.stuno" clearable></el-input>
+              </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-form-item label="性别">
+            <el-radio-group v-model="form.gender">
+              <el-radio label="男"></el-radio>
+              <el-radio label="女"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </el-row>
+
+        <el-row>
+          <el-col :span="6">
+              <el-form-item label="年龄">
+                  <el-input prefix-icon="el-icon-user" v-model="form.age" clearable></el-input>
+              </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-col :span="6">
+              <el-form-item label="地址">
+                  <el-input prefix-icon="el-icon-location-outline" v-model="form.address" clearable></el-input>
+              </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-col :span="6">
+              <el-form-item label="电话">
+                  <el-input prefix-icon="el-icon-phone-outline" v-model="form.phone" clearable></el-input>
+              </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-col :span="6">
+            <el-form-item label-width="80px" label="登记日期:">
+              <el-date-picker v-model="form.checkin" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期和时间" :editable="false" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit" round>更新或保存</el-button>
+
+        </el-form-item>
+      </el-form>
+
   </div>
+
 </template>
 
 
 <script>
   import { mapGetters } from 'vuex'
   import PanThumb from '@/components/PanThumb'
+  import { fetchDetail, updateDetail } from '@/api/student'
   // 默认导出
   export default {
     name: 'myinfo',
@@ -38,6 +105,17 @@
     data() {
       return {
 
+        form: {
+          uid: '',
+          stuno: '',
+          stuname: '',
+          gender: '',
+          age: '',
+          address: '',
+          phone: '',
+          headimgsrc: '',
+          checkin: ''
+        }
       }
     },
     computed: {
@@ -48,10 +126,45 @@
         'roles',
         'perms'
       ])
+    },
+    created() {
+      this.initData()
+    },
+    methods: {
+      onSubmit() {
+        console.log(this.form)
+
+        updateDetail(this.form).then(res => {
+          console.log(res)
+          this.$message({
+            message: '信息更新成功',
+            type: 'success'
+          })
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      initData() {
+        fetchDetail().then(res => {
+          console.log(res)
+
+          this.form.uid = res.data.student.uid
+          this.form.stuno = res.data.student.stuno
+          this.form.gender = res.data.student.gender
+          this.form.age = res.data.student.age
+          this.form.address = res.data.student.address
+          this.form.phone = res.data.student.phone
+          this.form.checkin = res.data.student.checkin
+          this.form.headimgsrc = res.data.student.headimgsrc
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+
     }
   }
 </script>
-// 测试提交
+
 <style rel="stylesheet/scss" lang="scss" scoped>
   .pan-info {
     position: absolute;
@@ -113,4 +226,5 @@
       }
     }
   }
+
 </style>

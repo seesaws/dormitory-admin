@@ -36,7 +36,7 @@ export default {
     height: {
       type: Number,
       required: false,
-      default: 400
+      default: 360
     }
   },
   data() {
@@ -83,7 +83,6 @@ export default {
         imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
         default_link_target: '_blank',
         link_title: false,
-        language: 'zh_CN',
         init_instance_callback: editor => {
           if (_this.value) {
             editor.setContent(_this.value)

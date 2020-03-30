@@ -24,7 +24,7 @@ Vue.prototype.$hasPerm = hasPerm
 Vue.directive('perm', perm)
 
 Vue.use(Element, {
-  size: 'medium', // set element-ui default size
+  size: 'medium' // set element-ui default size
 })
 
 // register global utility filters.
@@ -41,3 +41,4 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+

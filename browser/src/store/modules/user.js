@@ -1,6 +1,6 @@
 import authApi from '@/api/auth'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import avatorImg from '../../../static/image/avator.gif'
+import headimg from '../../../static/image/bh3.jpg'
 
 const user = {
   state: {
@@ -10,7 +10,7 @@ const user = {
     token: getToken(),
     name: '',
     nick: '',
-    avatar: avatorImg,
+    avatar: headimg,
     introduction: '',
     visitor: false,
     roles: [],

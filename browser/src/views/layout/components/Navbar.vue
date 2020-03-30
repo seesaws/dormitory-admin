@@ -67,28 +67,27 @@ import userApi from '@/api/user'
 
 export default {
 
-  data(){
-
-    let validatePass = (rule, value, callback) => {
+  data() {
+    const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'));
+        callback(new Error('请输入密码'))
       } else {
         if (this.temp.pwd2 !== '') {
-          this.$refs.dataForm.validateField('pwd2');
+          this.$refs.dataForm.validateField('pwd2')
         }
-        callback();
+        callback()
       }
-    };
+    }
 
-    let validatePass2 = (rule, value, callback) => {
+    const validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请再次输入密码'));
-      } else if (value != this.temp.pwd) {
-        callback(new Error('两次输入密码不一致!'));
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.temp.pwd) {
+        callback(new Error('两次输入密码不一致!'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       dialogVisible: false,
       temp: {
@@ -96,11 +95,10 @@ export default {
         pwd2: null
       },
       rules: {
-        pwd: [{validator: validatePass, trigger: 'blur'}],
-        pwd2: [{validator: validatePass2, trigger: 'change'}]
-      },
+        pwd: [{ validator: validatePass, trigger: 'blur' }],
+        pwd2: [{ validator: validatePass2, trigger: 'change' }]
+      }
     }
-
   },
   components: {
     Breadcrumb,
@@ -113,7 +111,7 @@ export default {
       'sidebar',
       'name',
       'avatar',
-      'roles',
+      'roles'
     ])
   },
   methods: {
@@ -125,21 +123,20 @@ export default {
         location.reload()// In order to re-instantiate the vue-router object to avoid bugs
       })
     },
-    handleUpdatePwd(){
+    handleUpdatePwd() {
       this.dialogVisible = true
       this.$nextTick(() => this.$refs['dataForm'].clearValidate())
     },
-    updatePwd(){
+    updatePwd() {
       this.$refs['dataForm'].validate((valid) => {
         if (!valid) return
-        const tempData = Object.assign({}, this.temp)//copy obj
+        const tempData = Object.assign({}, this.temp)// copy obj
         userApi.updatePwd(tempData).then(res => {
           this.dialogVisible = false
-          this.$message.success("更新密码成功")
+          this.$message.success('更新密码成功')
         })
       })
-    },
-
+    }
 
   }
 }

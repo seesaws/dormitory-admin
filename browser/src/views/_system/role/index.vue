@@ -229,7 +229,7 @@
             this.tableData.unshift(Object.assign({}, this.temp))
             ++this.tablePage.total
             this.dialogFormVisible = false
-            this.message.success('添加角色成功')
+            this.$message.success('添加角色成功')
           })
         })
       }

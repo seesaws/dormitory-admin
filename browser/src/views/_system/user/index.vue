@@ -9,7 +9,7 @@
       </el-tooltip>
     </el-row>
     <div style="margin-bottom: 30px;"></div>
-    <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleCreate" v-perm="'b:user:add'">{{textMap.create}}</el-button>
+    <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleCreate" v-perm="'b:user:add'" round>{{textMap.create}}</el-button>
     <div style="margin-bottom: 30px;"></div>
     <!--列表-->
     <el-table style="width: 100%"
@@ -212,13 +212,12 @@
       this.fetchData()
     },
 
-     watch: {
+    watch: {
       // 延时查询
       'tableQuery.nick': debounce(function() {
         this.fetchData()
       }, 500)
     }, // watch
-
 
     methods: {
 

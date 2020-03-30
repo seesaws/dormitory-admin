@@ -114,6 +114,7 @@ export const asyncRouterMap = [
       { path: 'repair', component: _import('menu/menu4_1/a'), name: 'repair', meta: { perm: 'm:dormitory:repair', title: '报修中心', icon: 'setting', noCache: true }},
       { path: 'query', component: _import('menu/menu4_1/b'), name: 'query', meta: { perm: 'm:dormitory:query', title: '报修查询', icon: 'solution', noCache: true }},
       { path: 'manage', component: _import('menu/menu4_1/c'), name: 'manage', meta: { perm: 'm:dormitory:manage', title: '报修管理', icon: 'monitor', noCache: true }}
+
     ]
   },
 
@@ -128,6 +129,7 @@ export const asyncRouterMap = [
     children: [
       { path: 'create', component: _import('menu/notice/create'), name: 'notice_create', meta: { perm: 'm:notice_manage:create', title: '发布公告', icon: 'edit-square', noCache: true }},
       { path: 'edit/:nid(\\d+)', component: _import('menu/notice/edit'), name: 'notice_edit', meta: { perm: 'm:notice_manage:edit', title: '编辑公告', noCache: true, activeMenu: '/notice/list' }, hidden: true },
+      { path: 'read/:nid(\\d+)', component: _import('menu/notice/read'), name: 'notice_read', meta: { perm: 'm:notice_manage:read', title: '查看公告', noCache: true, activeMenu: '/notice/list' }, hidden: true },
       { path: 'list', component: _import('menu/notice/list'), name: 'notice_list', meta: { perm: 'm:notice_manage:list', title: '公告列表', icon: 'unordered list', noCache: true }}
     ]
   },

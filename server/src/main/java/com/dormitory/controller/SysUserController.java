@@ -239,6 +239,7 @@ public class SysUserController {
     public Json findUserRoles(@PathVariable String uid){
         String oper = "find user roles";
         log.info("{}, uid: {}", oper, uid);
+        // 判断空格、制表符、换行符等 isEmpty 为 false
         if (StringUtils.isBlank(uid)){
             return Json.fail(oper, "无法查询当前用户的角色值：参数为空（用户id）");
         }

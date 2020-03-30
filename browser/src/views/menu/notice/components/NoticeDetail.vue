@@ -29,7 +29,7 @@
 
                 <el-col :span="10">
                   <el-form-item label-width="120px" label="发表时间:" class="postInfo-container-item">
-                    <el-date-picker v-model="postForm.publishtime" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期和时间" />
+                    <el-date-picker  v-model="postForm.publishtime" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期和时间" :editable="false"/>
                   </el-form-item>
                 </el-col>
 
@@ -54,7 +54,7 @@
 import Tinymce from '@/components/Tinymce'
 import MDinput from '@/components/MDinput'
 import Sticky from '@/components/Sticky' // 粘性header组件
-import { fetchNotice, createNotice, updateNotice, fetchList } from '@/api/notice'
+import { fetchNotice, createNotice, updateNotice } from '@/api/notice'
 
 const defaultForm = {
   title: '', // 文章题目
@@ -69,6 +69,10 @@ export default {
   components: { Tinymce, MDinput, Sticky },
   props: {
     isEdit: {
+      type: Boolean,
+      default: false
+    },
+    isRead: {
       type: Boolean,
       default: false
     }
@@ -116,6 +120,11 @@ export default {
       const nid = this.$route.params && this.$route.params.nid
       this.fetchData(nid)
     }
+    if (this.isRead) {
+      const nid = this.$route.params && this.$route.params.nid
+      this.fetchData(nid)
+    }
+    document.title = `发布公告`
 
     // Why need to make a copy of this.$route here?
     // Because if you enter this page and quickly switch tag, may be in the execution of the setTagsViewTitle function, this.$route is no longer pointing to the current page
@@ -128,6 +137,11 @@ export default {
     // 路由发生变化页面刷新
       this.$router.go(0)
     }
+
+  },
+
+  destroyed() {
+    document.title = `公寓管理系统`
   },
   methods: {
 
@@ -146,6 +160,10 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    setPageTitle() {
+      const title = 'Edit Notice'
+      document.title = `${title} - ${this.postForm.nid}`
     },
 
     submitForm() {

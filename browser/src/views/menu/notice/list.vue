@@ -19,6 +19,7 @@
           <span v-text="parseTime(scope.row.publishtime)"></span>
         </template>
       </el-table-column>
+
       <el-table-column min-width="300px" label="标题" header-align="center">
         <template slot-scope="{row}">
           <router-link :to="'/notice_manage/edit/'+row.nid" class="link-type">
@@ -26,6 +27,7 @@
           </router-link>
         </template>
       </el-table-column>
+
       <el-table-column
         prop="author"
         label="作者"

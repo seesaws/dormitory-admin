@@ -25,8 +25,8 @@ public class SysNotice extends Model<SysNotice> {
     @TableId(type = IdType.ASSIGN_ID)
     private String nid;     // 公告id
     private String title;   // 公告标题
-    private String content;    // 用户昵称，可改
-    private String author;     // 已加密的登录密码
+    private String content;    // 内容
+    private String author;     // 作者
     private Date publishtime;   // 创建时间
     private Date updated;   // 修改时间
     //非数据库字段

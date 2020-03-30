@@ -18,12 +18,16 @@
           <span v-text="parseTime(scope.row.publishtime)"></span>
         </template>
       </el-table-column>
-      <el-table-column
-        prop="title"
-        label="标题"
-        style="width: 100%"
-        header-align="center">>
+
+
+      <el-table-column min-width="300px" label="标题" header-align="center">
+        <template slot-scope="{row}">
+          <router-link :to="'/notice_manage/read/'+row.nid" class="link-type">
+            <span>{{ row.title }}</span>
+          </router-link>
+        </template>
       </el-table-column>
+
       <el-table-column
         prop="author"
         label="作者"
